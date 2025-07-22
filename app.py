@@ -1,49 +1,29 @@
-from flask import Flask, request, jsonify, session
-from flask_session import Session
+from flask import Flask, request, jsonify
 from agent import get_agent_message
 import json
-from flask import current_app,request
-import sys
-import os
 
 app = Flask(__name__)
 
-
 @app.route("/")
 def index():
-    return jsonify({"message": "Welcome to the LLM Chatbot!"})
+    return jsonify({"message": "Welcome to the Aged Care/Disability HRM Chatbot!"})
 
 @app.route("/chat", methods=["POST"])
 def chat():
-
     try:
-        param=json.loads(request.data)
-        query=param['query']
+        param = request.get_json()
+        query = param.get('query', '')
 
-        if query!="":
-            response=get_agent_message(query)
-
-            
-
-
-
-
-            if response['answer']=="":
-                os._exit(0)
-                
-
-
-
-            return response
-        
-
-
+        if query:
+            response = get_agent_message(query)
+            if response['answer'] == "":
+                return jsonify({'result': "All questions answered. Thank you!", "status": "completed"})
+            return jsonify(response)
         else:
-            responses=json.dumps({'Result ': " Retry by entering something","status":"Answers completed"})
+            return jsonify({'result': "Retry by entering something", "status": "Answers completed"})
     except Exception as e:
-        print("error",e)
-        response=json.dumps({"result":e,"status":"failed"})
-        return response
+        print("error", e)
+        return jsonify({"result": str(e), "status": "failed"})
 
 if __name__ == "__main__":
     app.run(debug=True)
