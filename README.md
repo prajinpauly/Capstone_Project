@@ -45,10 +45,12 @@ The system is extensible, supports CSV export for reporting, and can be integrat
 
 ---
 
-## Getting Started
+## Author
 
-### 1. Clone the repository
+**Prajin Paul**  
+📧 Email: paulprajin2015@gmail.com  
+🔗 [LinkedIn](https://www.linkedin.com/in/prajin-paul-b64415247)
 
-```bash
-git clone https://github.com/yourusername/aged-care-hrm-recruiter-chatbot.git
-cd aged-care-hrm-recruiter-chatbot
+---
+
+*Feel free to adapt this README for your own branding or additional features!*
